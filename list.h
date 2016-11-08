@@ -22,7 +22,7 @@ struct list {
 typedef struct list list;
 
 list* createList();
-void addNode(char *n, list *l);
+node* addNode(char *n, list *l);
 void removeNode(char *n, list *l);
 int nodeExists(char *n, list *l);
 void destroyList(list *l);
