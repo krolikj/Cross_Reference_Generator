@@ -1,6 +1,7 @@
 #include "list.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 list* createList(){
   list *l = (list*)malloc(sizeof(list));
@@ -8,21 +9,31 @@ list* createList(){
   return l;
 }
 
-void addNode(char *n, list *l){
+node* addNode(char *n, list *l){
   node *cur = NULL;
   node *nde = (node*)malloc(sizeof(node));
   if(l -> head == NULL){
     nde -> name = n;
     nde -> next = NULL;
     nde -> q = NULL;
+    l -> head = nde;
+    printf("%s\n", l -> head -> name);
   }else{
     cur = l -> head;
-    while(cur -> next != NULL)
+    while(cur -> next != NULL){
       cur = cur -> next;
+    }
     nde -> name = n;
     nde -> next = NULL;
     nde -> q = NULL;
+    cur -> next = nde;
+    printf("%s\n", l -> head -> name);
   }
+  cur = l-> head;
+  while(cur -> next != NULL){
+    cur = cur -> next;
+  }
+  return cur;
 }
 
 void removeNode(char *n, list *l){
@@ -30,7 +41,7 @@ void removeNode(char *n, list *l){
   node *prev = cur;
   while(cur != NULL){
     if(cur -> name == n){
-      prev ->next = cur -> next;
+      prev -> next = cur -> next;
       if(cur == l -> head)
         l  -> head = cur -> next;
       free(cur);
@@ -44,8 +55,9 @@ void removeNode(char *n, list *l){
 int nodeExists(char *n, list *l){
   node *cur = l -> head;
   while(cur != NULL){
-    if(cur -> name == n)
+    if(strcmp(cur -> name, n)){
       return TRUE;
+    }
     cur = cur -> next;
   }
   return FALSE;
