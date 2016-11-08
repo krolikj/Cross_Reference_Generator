@@ -20,7 +20,8 @@ void enqueue(queue *q, lineNum *lNum){
   }else{
     q -> last -> prev = lNum;
     q -> last = lNum;
-  }  
+  }
+  q -> size++;  
 }
 
 lineNum* dequeue(queue *q){
@@ -39,4 +40,10 @@ int isEmpty(queue *q){
     return TRUE;
   else
     return FALSE;
+}
+
+lineNum* createLineNum(int n){
+  lineNum *ln = (lineNum*)malloc(sizeof(lineNum));
+  ln -> lNum = n;
+  return ln;
 }
